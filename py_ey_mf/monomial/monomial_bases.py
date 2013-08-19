@@ -282,7 +282,7 @@ _dim_diff_map={1:(_1d_ori,_1d_x),2:(_2d_ori,_2d_x,_2d_y),3:(_3d_ori,_3d_x,_3d_y,
 
 _diff_dim_funcs_map={0:_dim_ori_map,1:_dim_diff_map}
 
-class MonomialBasis(object):
+class MonomialBases(object):
     def __init__(self):
         self._dim=2
         self._monomial_degree=2
@@ -334,14 +334,14 @@ class MonomialBasis(object):
         num_rows=len(self.funcs)
         return (num_rows,num_cols)
     
-    def __call__(self,xs,result=None):
+    def __call__(self,pos,result=None):
         if result is None:
             num_rows,num_cols=self.results_size()
             result=np.ndarray((num_rows,num_cols),dtype=np.double)
         for func,row in zip(self.funcs,result):
             if row is None:
                 raise ValueError("None row, wrong results container")
-            func(xs,self._monomial_degree,row)
+            func(pos,self._monomial_degree,row)
         return result
             
         

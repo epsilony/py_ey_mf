@@ -5,7 +5,7 @@
 
 import sympy
 import numpy as np
-from mf.monomial.monomial_basis import MonomialBasis
+from ..monomial_bases import MonomialBases
 from nose.tools import ok_,nottest
 import json
 from io import StringIO
@@ -110,6 +110,7 @@ def gen_test_datas_json_string():
     json.dump(test_datas,sio,cls=NumpyEncoder)
     return sio.getvalue()
 
+@nottest
 def gen_test_datas_json_file(file_name):
     json_str=gen_test_datas_json_string()
     with open(file_name,'w') as f:
@@ -117,7 +118,7 @@ def gen_test_datas_json_file(file_name):
 
 def exam_monomial(test_data):
     err_limit = 1e-6
-    mb = MonomialBasis()
+    mb = MonomialBases()
     mb.diff_order = 1
     mb.dim = test_data['dimension']
     mb.monomial_degree = 3
