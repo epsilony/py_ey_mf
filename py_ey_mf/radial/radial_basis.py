@@ -3,7 +3,7 @@
 @author: <epsilonyuan@gmail.com>
 '''
 
-from py_ey_mf.util.with_diff_util import output_length
+from ..util.with_diff_util import output_length
 import numpy as np
 
 class RadialBasis(object):
@@ -26,7 +26,7 @@ class RadialBasis(object):
     def __call__(self, distance_by_diff, influence_rad, result=None):
         output_len = output_length(self.dim, self.diff_order)
         if result is None:
-            result = np.zeros((output_len,), dtype=np.double)
+            result = np.ndarray((output_len,), dtype=np.double)
         delta = distance_by_diff[0] / influence_rad
         self.core(delta, result)
         if self.diff_order >= 1 :
