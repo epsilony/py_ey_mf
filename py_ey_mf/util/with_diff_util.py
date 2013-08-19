@@ -5,6 +5,7 @@ Created on 2013-1-2
 
 '''
 from scipy.misc import comb
+
 def output_length(dim, diff_order):
     if dim == 1:
         return diff_order + 1
