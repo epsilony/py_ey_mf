@@ -72,8 +72,16 @@ def gen_test_data_by_wendland_3_2():
     inf_rad = gen_sample_inf_rad()
     dist_samples = raw_sample_to_distance_by_diff_samples(raw_samples)
     exps = gen_wendland_3_2_exps(raw_samples, inf_rad)
-    return {'infRad':inf_rad,'dists':dist_samples,'exps':exps,'diffOrder':1,'dim':3,'rawPts':raw_samples}
-    
+    return {'coreName':'Wendland_3_2','infRad':inf_rad,'dists':dist_samples,'exps':exps,'diffOrder':1,'dim':3,'rawPts':raw_samples}
+
+@nottest
+def gen_test_data_to_json_file():
+    file_name="radial_basis.json"
+    with open(file_name,'w') as fop:
+        import json
+        from ...util.json_util import NumpyEncoder
+        json.dump(gen_test_data_by_wendland_3_2(),fop,cls=NumpyEncoder)
+
 def test_RadialBasis_by_wendland_3_2(err_limit=1e-6):
     test_data=gen_test_data_by_wendland_3_2()
     raw_samples = test_data['rawPts']
