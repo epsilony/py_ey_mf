@@ -120,7 +120,7 @@ def exam_monomial(test_data):
     err_limit = 1e-6
     mb = MonomialBases()
     mb.diff_order = 1
-    mb.dim = test_data['dimension']
+    mb._dim = test_data['dimension']
     mb.monomial_degree = 3
     for smp, exp in zip(test_data['samples'], test_data['exps']):   
         try:

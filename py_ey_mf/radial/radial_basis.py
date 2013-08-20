@@ -24,7 +24,7 @@ class RadialBasis(object):
         self.set_dim(1)
         
     def __call__(self, distance_by_diff, influence_rad, result=None):
-        output_len = output_length(self.dim, self.diff_order)
+        output_len = output_length(self._dim, self.diff_order)
         if result is None:
             result = np.ndarray((output_len,), dtype=np.double)
         delta = distance_by_diff[0] / influence_rad
