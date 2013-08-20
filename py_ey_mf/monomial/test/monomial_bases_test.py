@@ -9,7 +9,8 @@ from ..monomial_bases import MonomialBases
 from nose.tools import ok_,nottest
 import json
 from io import StringIO
-from json import JSONEncoder
+
+from ...util.json_util import NumpyEncoder
 
 def gen_symbols_set():
     x, y, z = sympy.symbols('x,y,z')
@@ -95,12 +96,6 @@ def gen_test_datas():
                           }
                          )
     return test_data
-
-class NumpyEncoder(JSONEncoder):
-    def default(self,obj):
-        if isinstance(obj,np.ndarray):
-            return obj.tolist()
-        return super().default(obj)
             
 
 @nottest
