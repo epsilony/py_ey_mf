@@ -8,7 +8,7 @@ from ..monomial.monomial_bases import MonomialBases
 from ..util.with_diff_util import output_length
 
 class _MLSCache(object):
-    _indial_caches_size = 6  # must be strictly greater than the diff_size, for 3d, if only supporting first order, the diff_size is 4 
+    _indcial_caches_size = 6  # must be strictly greater than the diff_size, for 3d, if only supporting first order, the diff_size is 4 
     
     def __init__(self):
         self._bases_size = -1
@@ -16,7 +16,7 @@ class _MLSCache(object):
         self._diff_order=-1
         self._dim = -1
         self._B_caches_map = {}
-        self._weight_caches = [np.ndarray((i + 1,), dtype=np.double) for i in range(0, self._indial_caches_size)]
+        self._weight_caches = [np.ndarray((i + 1,), dtype=np.double) for i in range(0, self._indcial_caches_size)]
     
     def setup(self, diff_order, dim, bases_size, nodes_size):
         if diff_order <0 or diff_order >1:
@@ -67,7 +67,7 @@ class _MLSCache(object):
         return self._gamma_caches[index]
     
     def get_cache_size(self):
-        return self._indial_caches_size
+        return self._indcial_caches_size
     
     def get_mat_As_cache(self):
         return self._A_caches
@@ -79,18 +79,18 @@ class _MLSCache(object):
         return self._bases_caches[self._diff_size - 1]
             
     def _new_B_caches(self):
-        b_caches = [np.ndarray((self._bases_size, self._nodes_size), dtype=np.double) for _i in range(self._indial_caches_size)]
+        b_caches = [np.ndarray((self._bases_size, self._nodes_size), dtype=np.double) for _i in range(self._indcial_caches_size)]
         return b_caches
     
     def _new_A_caches(self):
-        a_caches = [np.ndarray((self._bases_size, self._bases_size), dtype=np.double) for _i in range(self._indial_caches_size)]
+        a_caches = [np.ndarray((self._bases_size, self._bases_size), dtype=np.double) for _i in range(self._indcial_caches_size)]
         return a_caches
     
     def _new_gamma_caches(self):
-        return [np.ndarray((self._bases_size,), dtype=np.double) for _i in range(self._indial_caches_size)]
+        return [np.ndarray((self._bases_size,), dtype=np.double) for _i in range(self._indcial_caches_size)]
     
     def _new_bases_caches(self):
-        return [np.ndarray((i + 1, self._bases_size), dtype=np.double) for i in range(self._indial_caches_size)]
+        return [np.ndarray((i + 1, self._bases_size), dtype=np.double) for i in range(self._indcial_caches_size)]
     
 class MLS(object):
     def __init__(self, dim=2, weight_func=None, bases=None):
