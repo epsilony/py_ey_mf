@@ -5,7 +5,7 @@
 
 import sympy as sp
 import numpy as np
-from nose.tools import ok_
+from nose.tools import ok_,nottest
 from itertools import repeat
 
 import sys
@@ -21,7 +21,7 @@ def gen_raw_samples():
     return result
 
 def gen_sample_inf_rad():
-    return 2
+    return 2.0
 
 def raw_sample_to_distance_by_diff_samples(raw_sample):
     result = []
@@ -65,12 +65,21 @@ def gen_wendland_3_2_exps(raw_samples, inf_rad):
         exps.append(exp)
     
     return exps
-    
-def test_RadialBasis_by_wendland_3_2(err_limit=1e-6):
+
+@nottest
+def gen_test_data_by_wendland_3_2():
     raw_samples = gen_raw_samples()
     inf_rad = gen_sample_inf_rad()
     dist_samples = raw_sample_to_distance_by_diff_samples(raw_samples)
     exps = gen_wendland_3_2_exps(raw_samples, inf_rad)
+    return {'infRad':inf_rad,'dists':dist_samples,'exps':exps,'diffOrder':1,'dim':3,'rawPts':raw_samples}
+    
+def test_RadialBasis_by_wendland_3_2(err_limit=1e-6):
+    test_data=gen_test_data_by_wendland_3_2()
+    raw_samples = test_data['rawPts']
+    inf_rad = test_data['infRad']
+    dist_samples = test_data['dists']
+    exps = test_data['exps']
     from ..radial_basis import RadialBasis
     rb = RadialBasis()
     rb.dim = 3;
